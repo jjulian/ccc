@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title>Charm City Circulator Predictions</title>
+    <meta name="description" content="All the predictions for all the stops and all the routes of the Charm City Circulator. Uses the NextBus XML data feed to provide real-time data." />
+    <!-- <link rel="shortcut icon" href="avatar.png"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- <link rel="apple-touch-icon" href="avatar.png"> -->
+    <meta property="og:site_name" content="Charm City Circulator Predictions" />
+    <!-- <meta property="og:image" content="avatar.png" /> -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href="css/ccc.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="js/underscore-1.5.2.js" type="text/javascript"></script>
+    <script src="js/backbone-1.1.0.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <footer>
+      <button class="refresh">Refresh Predictions!</button>
+      <p><a href="http://madewithloveinbaltimore.org" target="_blank">Made with &hearts; in Baltimore</a> by <a href="http://twitter.com/jonathanjulian" target="_blank">@jonathanjulian</a></p>
+    </footer>
+  </body>
+  <script id="template_route" type="text/html">
+    <header><%= route.get('title') %> route</header>
+    <% route.get('stops').each(function(stop) { %> 
+      <table class="stop" data-tag="<%= stop.get('tag') %>">
+        <tr>
+          <td class="title"><%= stop.get('title') %></td>
+          <td class="predictions"></td>
+        </tr>
+      </table>
+    <% }); %>
+  </script>
+  <script id="template_prediction" type="text/html">
+    <span class="prediction <%= prediction.minutes === '0' ? 'arriving' : '' %>">
+      <%= prediction.minutes === '0' ? 'BUS' : prediction.minutes %>
+    </span>
+  </script>
+  <script src="js/ccc.js" type="text/javascript"></script>
+</html>
